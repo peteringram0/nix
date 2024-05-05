@@ -103,44 +103,46 @@
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; let
-    chrome = if pkgs.stdenv.hostPlatform.system != "aarch64-linux" then google-chrome else null;
-  in [
+  environment.systemPackages = with pkgs; [
+
+    # Generic system
     wget
-    unstable.helix
     openssh
-    screenfetch
     git
+    screenfetch
+    xclip
+    _1password
+    _1password-gui
+    nerdfonts
+    obsidian
+
+    # Development
+    unstable.helix
+    unstable.zellij
     chezmoi
     oh-my-zsh
     zsh
     zsh-completions
-    xclip
-    gtkmm3 # needed for VMware Tools clipboard to work
     lazygit
     delta # pager for git
-    unstable.zellij
     bat
     yazi
     eza
-
     rustup
     gcc
-
-    # pkg-config
-    # openssl.dev
-    nerdfonts
-    # glib
-    # glib.dev
-    # gobject-introspection
-    _1password
-    _1password-gui
     nil # .nix files
     starship
-    obsidian
     docker
 
-    chrome
+    # ARM
+    (lib.mkIf (pkgs.stdenv.hostPlatform.system == "aarch64-linux") [
+      gtkmm3 # needed for VMware Tools clipboard to work
+    ])
+
+    # Intel
+    (lib.mkIf (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [
+      google-chrome
+    ])
   ];
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
