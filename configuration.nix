@@ -103,7 +103,9 @@
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; let
+    chrome = if pkgs.stdenv.hostPlatform.system != "aarch64-linux" then google-chrome else null;
+  in [
     wget
     unstable.helix
     openssh
@@ -114,7 +116,7 @@
     zsh
     zsh-completions
     xclip
-    gtkmm3 # neded for vmware tools clipboard to work
+    gtkmm3 # needed for VMware Tools clipboard to work
     lazygit
     delta # pager for git
     unstable.zellij
@@ -133,14 +135,12 @@
     # gobject-introspection
     _1password
     _1password-gui
-    # google-chrome
     nil # .nix files
     starship
     obsidian
     docker
 
-    (if pkgs.system != "aarch64-linux" then google-chrome else null)
-    
+    chrome
   ];
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
