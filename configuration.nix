@@ -135,14 +135,14 @@
     docker
 
     # ARM
-    (lib.mkIf (pkgs.stdenv.hostPlatform.system == "aarch64-linux") [
+    (lib.mkIf (pkgs.stdenv.hostPlatform.system == "aarch64-linux")
       gtkmm3 # needed for VMware Tools clipboard to work
-    ])
+    )
 
     # Intel
-    (lib.mkIf (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [
+    (lib.mkIf (pkgs.stdenv.hostPlatform.system == "x86_64-linux") 
       google-chrome
-    ])
+    )
   ];
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
