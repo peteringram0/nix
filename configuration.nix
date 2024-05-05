@@ -101,7 +101,6 @@
   # needed for 1password
   # nixpkgs.config.allowUnfree = true;
   
-  # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
@@ -152,6 +151,9 @@
 
   # this doesnt seem to work
   # programs.git = {
+  #   enable = true;
+  #   # userName = "Peter Ingram";
+  #   # userEmail = "peter.ingram0@gmail.com";
   #   config = {
   #     gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
   #   };
@@ -180,12 +182,6 @@
       PermitRootLogin = "yes";
       X11Forwarding = true;
     };
-    # This part is not working
-    # extraConfig = ''
-    #   # PI TEST
-    #   # Host *
-    #   	IdentityAgent ~/.1password/agent.sock
-    # '';
   };
 
   # SSH
@@ -206,6 +202,8 @@
   # DONT EDIT !!
   system.stateVersion = "23.11";
 
+  # system.autoUpgrade.enable = true;
+  # system.autoUpgrade.allowReboot = true;
 }
 
 # new latest 3
