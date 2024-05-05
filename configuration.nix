@@ -133,11 +133,14 @@
     # gobject-introspection
     _1password
     _1password-gui
-    google-chrome
+    # google-chrome
     nil # .nix files
     starship
     obsidian
     docker
+
+    (if pkgs.system != "aarch64-linux" then google-chrome else null)
+    
   ];
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
