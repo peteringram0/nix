@@ -78,22 +78,10 @@
     description = "peter";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
-    # home = "/home/peter";
-    # createHome = true;
-    # packages = with pkgs; [
-    # ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZxjYSlHvWpQ6VPPMwfJX8NfzQUXkqV8zhUg5cy3AIB"
       # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHYPVBU8Bf1c/fOV9pv1TmAAPDZsVojogSuAU+tAgmD1"
     ];
-    # home = {
-    #   ".ssh/config".text = ''
-    #     # PI TEST
-    #     Host *
-    #       IdentityAgent ~/.1password/agent.sock
-    #       ForwardAgent yes
-    #      '';
-    # };
   };
 
   # users.users.peter.home.file.".ssh/config".text = ''
@@ -156,7 +144,7 @@
     enable = true;
   };
 
-  # this doesnt seem to work // this adds to git global config at /etc/gitconfig
+  # This adds to GIT global config at /etc/gitconfig (works alongside my file at ~/.gitconfig)
   programs.git = {
   enable = true;
      config = {
@@ -193,13 +181,6 @@
   programs.ssh = {
     forwardX11 = true;
     setXAuthLocation = true;
-
-    # This part is not working
-    # extraConfig = ''
-    #   # PI TEST
-    #   Host *
-    #   	IdentityAgent ~/.1password/agent.sock
-    # '';
   };
 
   networking.firewall.enable = true;
@@ -208,7 +189,5 @@
   system.stateVersion = "23.11";
 
   system.autoUpgrade.enable = true;
-  # system.autoUpgrade.allowReboot = true;
-}
 
-# new latest 3
+}
