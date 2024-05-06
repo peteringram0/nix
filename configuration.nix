@@ -156,15 +156,13 @@
     enable = true;
   };
 
-  # this doesnt seem to work
-  # programs.git = {
-  #   enable = true;
-  #   userName = "Peter Ingram 2";
-    # userEmail = "peter.ingram0@gmail.com";
-    # config = {
-    #   gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
-    # };
-  # };
+  # this doesnt seem to work // this adds to git global config at /etc/gitconfig
+  programs.git = {
+  enable = true;
+     config = {
+        gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
+    };
+  };
 
   # Enable the 1Passsword GUI with myself as an authorized user for polkit
   programs._1password-gui = {
