@@ -23,9 +23,8 @@
     networkmanager.enable = true;
     useDHCP = false;
     interfaces.eth0.useDHCP = true;
-    # nameservers = ["1.1.1.1" "8.8.8.8"];
+    nameservers = ["1.1.1.1" "8.8.8.8"];
     hostName = "nixos";
-    # defaultGateway = "192.168.0.1";
   };
   
   # Set your time zone.
@@ -51,8 +50,10 @@
     enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    layout = "gb";
-    xkbVariant = "mac";
+    xkb = {
+      layout = "gb";
+      variant = "mac";
+    };
     # videoDrivers = ["displaylink"]; doesnt work in the VM
     # Enable touchpad support (enabled default in most desktopManager).
     # services.xserver.libinput.enable = true;
@@ -61,11 +62,7 @@
   # Configure console keymap
   console.keyMap = "uk";
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   # Enable sound with pipewire.
-  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -81,15 +78,25 @@
     description = "peter";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-    ];
+    # home = "/home/peter";
+    # createHome = true;
+    # packages = with pkgs; [
+    # ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZxjYSlHvWpQ6VPPMwfJX8NfzQUXkqV8zhUg5cy3AIB"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHYPVBU8Bf1c/fOV9pv1TmAAPDZsVojogSuAU+tAgmD1"
+      # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHYPVBU8Bf1c/fOV9pv1TmAAPDZsVojogSuAU+tAgmD1"
     ];
+    # home = {
+    #   ".ssh/config".text = ''
+    #     # PI TEST
+    #     Host *
+    #       IdentityAgent ~/.1password/agent.sock
+    #       ForwardAgent yes
+    #      '';
+    # };
   };
 
-  # users.users.peter.home.".ssh/config".text = ''
+  # users.users.peter.home.file.".ssh/config".text = ''
   #   # PI TEST
   #   Host *
   #     IdentityAgent ~/.1password/agent.sock
@@ -152,11 +159,11 @@
   # this doesnt seem to work
   # programs.git = {
   #   enable = true;
-  #   # userName = "Peter Ingram";
-  #   # userEmail = "peter.ingram0@gmail.com";
-  #   config = {
-  #     gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
-  #   };
+  #   userName = "Peter Ingram 2";
+    # userEmail = "peter.ingram0@gmail.com";
+    # config = {
+    #   gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
+    # };
   # };
 
   # Enable the 1Passsword GUI with myself as an authorized user for polkit
@@ -190,19 +197,19 @@
     setXAuthLocation = true;
 
     # This part is not working
-    extraConfig = ''
-      # PI TEST
-      Host *
-      	IdentityAgent ~/.1password/agent.sock
-    '';
+    # extraConfig = ''
+    #   # PI TEST
+    #   Host *
+    #   	IdentityAgent ~/.1password/agent.sock
+    # '';
   };
 
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # DONT EDIT !!
   system.stateVersion = "23.11";
 
-  # system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = true;
   # system.autoUpgrade.allowReboot = true;
 }
 
