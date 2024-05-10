@@ -12,6 +12,12 @@
         "electron-25.9.0"
       ];
     };
+
+    # Rust overlay
+    overlays = [
+      (import "${fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz"}/overlay.nix")
+    ];
+
   };
 
   # Bootloader
@@ -137,6 +143,17 @@
     (lib.mkIf (pkgs.stdenv.hostPlatform.system == "x86_64-linux") 
       google-chrome
     )
+
+    # RUST
+    (fenix.complete.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
+    rust-analyzer-nightly
+
   ];
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
