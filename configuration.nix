@@ -133,7 +133,9 @@
     nil # .nix files
     starship
     docker
-
+    httplz # serve alterntive
+    fly
+    
     # ARM
     (lib.mkIf (pkgs.stdenv.hostPlatform.system == "aarch64-linux")
       gtkmm3 # needed for VMware Tools clipboard to work
@@ -186,7 +188,7 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    ports = [ 22];
+    ports = [22];
     settings = {
       PasswordAuthentication = true;
       PermitRootLogin = "yes";
@@ -200,7 +202,11 @@
     setXAuthLocation = true;
   };
 
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [8000]; # httplz
+    allowedUDPPorts = [8000]; # httplz
+  };
 
   # DONT EDIT !!
   system.stateVersion = "23.11";
