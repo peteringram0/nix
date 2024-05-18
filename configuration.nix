@@ -135,6 +135,7 @@
     docker
     httplz # serve alterntive
     flyctl
+    ripgrep
     
     # ARM
     (lib.mkIf (pkgs.stdenv.hostPlatform.system == "aarch64-linux")
