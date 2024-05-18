@@ -134,7 +134,7 @@
     starship
     docker
     httplz # serve alterntive
-    fly
+    flyctl
     
     # ARM
     (lib.mkIf (pkgs.stdenv.hostPlatform.system == "aarch64-linux")
