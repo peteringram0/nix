@@ -136,6 +136,10 @@
     httplz # serve alterntive
     flyctl
     ripgrep
+
+    # Yew project
+    cargo-tauri
+    trunk
     
     # ARM
     (lib.mkIf (pkgs.stdenv.hostPlatform.system == "aarch64-linux")
