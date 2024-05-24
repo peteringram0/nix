@@ -86,22 +86,12 @@
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZxjYSlHvWpQ6VPPMwfJX8NfzQUXkqV8zhUg5cy3AIB"
-      # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHYPVBU8Bf1c/fOV9pv1TmAAPDZsVojogSuAU+tAgmD1"
     ];
   };
-
-  # users.users.peter.home.file.".ssh/config".text = ''
-  #   # PI TEST
-  #   Host *
-  #     IdentityAgent ~/.1password/agent.sock
-  # '';
 
   # Virtualization settings
   virtualisation.docker.enable = true;
 
-  # needed for 1password
-  # nixpkgs.config.allowUnfree = true;
-  
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
