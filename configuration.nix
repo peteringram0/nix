@@ -20,6 +20,13 @@
 
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+ # Import the home-modules/default.nix file
+  imports = [
+    ./home-modules/default.nix
+  ];
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -107,7 +114,7 @@
     obsidian
 
     # Development
-    unstable.helix
+    # unstable.helix
     unstable.zellij
     chezmoi
     oh-my-zsh
@@ -126,6 +133,7 @@
     httplz # serve alterntive
     flyctl
     ripgrep
+    # waybar
 
     # Yew project
     cargo-tauri
@@ -204,7 +212,15 @@
   };
 
   # DONT EDIT !!
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
+
+
+  # https://www.reddit.com/r/NixOS/comments/15y3v6p/how_do_you_automate_deletion_of_old_generations/
+  # nix.gc = {
+  #   automatic = true;
+  #   dates = "weekly";
+  #   delete_generations = "+5"; # Option added by nix-gc-env
+  # };
 
   system.autoUpgrade.enable = true;
 

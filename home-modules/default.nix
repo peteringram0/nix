@@ -25,16 +25,14 @@ imports = [
 
 users.users.peter.isNormalUser = true;
 home-manager.users.peter = { pkgs, ... }: {
-  # home.packages = [ pkgs.waybar ];
+  home.packages = [ pkgs.waybar ];
   programs.bash.enable = true;
 
   # The state version is required and should stay at the version you
   # originally installed.
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 };
 
-
-# programs.home-manager.enable = true;
 
 # programs.home-manager.users.peter = { pkgs, ... }: {
 #   home = {

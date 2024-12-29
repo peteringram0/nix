@@ -1,7 +1,7 @@
 { var, pkgs, ... }:{
     
   imports = [
-    ./glossynix
+    # ./glossynix
   ];
 
   programs.waybar.enable = true;
