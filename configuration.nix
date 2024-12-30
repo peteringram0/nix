@@ -22,9 +22,14 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  fonts.packages = [
+     pkgs.nerd-fonts._0xproto
+     pkgs.nerd-fonts.droid-sans-mono
+   ];
+
  # Import the home-modules/default.nix file
   imports = [
-    ./home-modules/default.nix
+    # ./home-modules/default.nix
   ];
 
   # Bootloader
@@ -110,12 +115,13 @@
     xclip
     _1password
     _1password-gui
-    nerdfonts
+    # nerdfonts
     obsidian
 
     # Development
     # unstable.helix
     unstable.zellij
+    unstable.ghostty
     chezmoi
     oh-my-zsh
     zsh
