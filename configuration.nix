@@ -29,6 +29,7 @@
 
  # Import the home-modules/default.nix file
   imports = [
+    # ./polybar.nix
     # ./home-modules/default.nix
   ];
 
@@ -122,6 +123,10 @@
     # unstable.helix
     unstable.zellij
     unstable.ghostty
+
+    # polybar
+    # pulseaudioLight
+    
     chezmoi
     oh-my-zsh
     zsh
