@@ -7,11 +7,3 @@ programs.git = {
     gpg."ssh".program = "${pkgs._1password-gui}/bin/op-ssh-sign";
   };
 };
-
-programs.zsh = {
-  enable = true;
-  ohMyZsh = {
-    enable = true;
-    plugins = ["git"];
-  };
-};

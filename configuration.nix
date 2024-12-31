@@ -40,8 +40,11 @@
 
     # Programs
     ./modules/packages.nix
-    ./modules/1_password.nix
-    ./modules/programs.nix
+    ./programs/1_password.nix
+    ./programs/git.nix
+    ./programs/zsh.nix
+    # ./programs/polybar.nix
+    
   ];
 
   fonts.packages = [
