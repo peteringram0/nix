@@ -14,6 +14,7 @@ environment.systemPackages = with pkgs; [
   _1password
   _1password-gui
   obsidian
+  discord
 
   # Dev Enviroment
   oh-my-zsh
