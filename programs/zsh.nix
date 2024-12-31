@@ -1,9 +1,11 @@
 { config, pkgs, ... }:
 
-programs.zsh = {
-  enable = true;
-  ohMyZsh = {
+{
+  programs.zsh = {
     enable = true;
-    plugins = ["git"];
+    ohMyZsh = {
+      enable = true;
+      plugins = ["git"];
+    };
   };
-};
+}
