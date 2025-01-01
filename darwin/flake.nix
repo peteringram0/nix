@@ -16,32 +16,47 @@
         pkgs.wget
         pkgs.obsidian
         pkgs.discord
+        pkgs.rectangle
+        pkgs.starship
+        pkgs.raycast
+        pkgs.google-chrome
+
+        # Companies
+        pkgs.flyctl
         
+        # Dev Tools        
         pkgs.ghostty
+        pkgs.zellij
         pkgs.yazi
         pkgs.chezmoi
         pkgs.eza
         pkgs.bat
-        pkgs.rectangle
-        pkgs.starship
-        pkgs.raycast
         pkgs.lazygit
         pkgs.delta
         pkgs.docker
         pkgs.ripgrep
-        pkgs.google-chrome
+        pkgs.fzf
 
+        # Shell
         pkgs.oh-my-zsh
         pkgs.zsh
         pkgs.zsh-completions
-       
-        pkgs.cargo
 
+        # Language Tools
+        pkgs.cargo
+        pkgs.cargo-tauri
+        pkgs.trunk
+
+        # Language Servers
         pkgs.nil
       ];
 
       nixpkgs.config.allowUnfree = true;
       nix.settings.experimental-features = "nix-command flakes";
+
+      fonts.packages = [
+        pkgs.nerd-fonts.meslo-lg
+      ];
 
       programs.zsh = {
         enable = true;
@@ -64,7 +79,10 @@
         caskArgs.no_quarantine = true;
         global.brewfile = true;
         masApps = { };
-        casks = [ "1password" "whatsapp" ];
+        casks = [
+          "1password"
+          "whatsapp"
+        ];
         # taps = [ "fujiapple852/trippy" ];
         # brews = [ "trippy" ];
       };
