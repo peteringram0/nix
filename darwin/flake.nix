@@ -49,6 +49,15 @@
 
         # Language Servers
         pkgs.nil
+        pkgs.typescript-language-server
+        pkgs.typos-lsp
+        pkgs.svelte-language-server
+        pkgs.superhtml
+        pkgs.rust-analyzer
+        pkgs.tailwindcss
+        pkgs.astro-language-server
+        pkgs.marksman
+        pkgs.bash-language-server
       ];
 
       nixpkgs.config.allowUnfree = true;
@@ -84,7 +93,7 @@
           "whatsapp"
         ];
         # taps = [ "fujiapple852/trippy" ];
-        # brews = [ "trippy" ];
+        brews = [ "tailwindcss-language-server" ];
       };
            
       # imports = [
