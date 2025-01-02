@@ -72,7 +72,7 @@
         enable = true;
       };
 
-      system.activationScripts.simpleCompletionLanguageServerInstall.text = ''
+      system.activationScripts.postUserActivation.text = ''
         #!/usr/bin/env bash
         cargo install --git https://github.com/estin/simple-completion-language-server.git
       '';
@@ -82,7 +82,7 @@
           autohide = true;
           persistent-apps = [
             "/Applications/Nix Apps/Ghostty.app"
-            "/Applications/Nix Apps/Chrome.app"
+            "/Applications/Nix Apps/Google Chrome.app"
             "/Applications/Nix Apps/Obsidian.app"
             "/Applications/Nix Apps/Slack.app"
           ];
