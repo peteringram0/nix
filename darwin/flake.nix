@@ -21,6 +21,7 @@
         pkgs.raycast
         pkgs.google-chrome
         pkgs.slack
+        pkgs.spotify
 
         # Companies
         pkgs.flyctl
@@ -41,7 +42,11 @@
         # Shell
         # pkgs.oh-my-zsh
         pkgs.zsh
-        pkgs.zsh-completions
+        # pkgs.zsh-completions
+        # pkgs.zsh-autocomplete
+        # pkgs.zsh-autosuggestions
+        # pkgs.zsh-syntax-highlighting
+        # pkgs.zsh-history
 
         # Language Tools
         pkgs.cargo
@@ -70,13 +75,30 @@
 
       programs.zsh = {
         enable = true;
+        enableCompletion = true;
+        # autocd = true;
+        # syntaxHighlighting.enable = true;
+        # autosuggestion.enable = true;
+        # history = {
+        #   size = 10000000;
+        #   save = 10000000;
+        #   ignoreSpace = true;
+        #   ignoreDups = true;
+        #   ignoreAllDups = true;
+        #   expireDuplicatesFirst = true;
+        #   extended = true;
+        #   share = true;
+        #   path = "/Users/pingram/.zsh_history";
+        # };
       };
+
+      # users.users.pingram.shell = pkgs.zsh;
 
       system.activationScripts.postActivation.text = ''
         #!/usr/bin/env bash
 
         # On My ZSH
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+        # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
         # Simple completion language server install
         cargo install --git https://github.com/estin/simple-completion-language-server.git
@@ -117,7 +139,9 @@
           "whatsapp"
         ];
         # taps = [ "fujiapple852/trippy" ];
-        brews = [ "tailwindcss-language-server" ];
+        brews = [
+          "tailwindcss-language-server"
+        ];
       };
            
       # imports = [
