@@ -39,7 +39,7 @@
         pkgs.fzf
 
         # Shell
-        pkgs.oh-my-zsh
+        # pkgs.oh-my-zsh
         pkgs.zsh
         pkgs.zsh-completions
 
@@ -72,20 +72,24 @@
         enable = true;
       };
 
-      system.activationScripts.simpleCompletionLSInstall.text = ''
+      system.activationScripts.postActivation.text = ''
         #!/usr/bin/env bash
+
+        # On My ZSH
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+        # Simple completion language server install
         cargo install --git https://github.com/estin/simple-completion-language-server.git
-      '';
 
-      system.activationScripts.setDesktopBackground.text = ''
-        #!/usr/bin/env bash
-        echo "running";
-        /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/pingram/Pictures/test.jpg"'
-      '';
-
-      system.activationScripts.nvmInstall.text = ''
-        #!/usr/bin/env bash
+        # NVM install
+        # export NVM_DIR="$HOME/.nvm"
+        # export XDG_CONFIG_HOME="$NVM_DIR"
+        # mkdir "$HOME/.nvm"
         wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+        # Set desktop wallpaper
+        /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/pingram/Pictures/test.jpg"'
+
       '';
 
       system.defaults = {
