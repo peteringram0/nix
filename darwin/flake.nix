@@ -157,6 +157,9 @@
       # Dark mode
       system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
+      # Trackpad speed (3 is max)
+      system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 3;
+
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
 
