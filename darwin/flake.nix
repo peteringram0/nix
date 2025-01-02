@@ -72,9 +72,14 @@
         enable = true;
       };
 
-      system.activationScripts.postUserActivation.text = ''
+      system.activationScripts.simpleCompletionLSInstall.text = ''
         #!/usr/bin/env bash
         cargo install --git https://github.com/estin/simple-completion-language-server.git
+      '';
+
+      system.activationScripts.setDesktopBackground.text = ''
+        echo "running";
+        /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/pingram/Pictures/test.jpg"'
       '';
 
       system.defaults = {
