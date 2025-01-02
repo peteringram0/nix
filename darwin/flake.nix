@@ -14,6 +14,7 @@
 
         # Generic System
         pkgs.wget
+        pkgs.curl
         pkgs.obsidian
         pkgs.discord
         pkgs.rectangle
@@ -45,7 +46,7 @@
         # pkgs.zsh-completions
         # pkgs.zsh-autocomplete
         # pkgs.zsh-autosuggestions
-        # pkgs.zsh-syntax-highlighting
+        pkgs.zsh-syntax-highlighting
         # pkgs.zsh-history
 
         # Language Tools
@@ -92,25 +93,31 @@
         # };
       };
 
-      # users.users.pingram.shell = pkgs.zsh;
-
       system.activationScripts.postActivation.text = ''
         #!/usr/bin/env bash
-
-        # On My ZSH
-        # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
         # Simple completion language server install
         cargo install --git https://github.com/estin/simple-completion-language-server.git
 
-        # NVM install
-        # export NVM_DIR="$HOME/.nvm"
-        # export XDG_CONFIG_HOME="$NVM_DIR"
-        # mkdir "$HOME/.nvm"
-        wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-
         # Set desktop wallpaper
         /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "${self}/lost-man.jpg"'
+       
+        # Install Oh My Zsh unattended
+        export HOME=/Users/pingram
+        if sudo -u pingram sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; then
+            echo "Oh My Zsh installed successfully."
+        else
+            echo "Failed to install Oh My Zsh."
+        fi
+
+        # NVM install
+        export NVM_DIR="$HOME/.nvm"
+        sudo -u pingram mkdir -p "$NVM_DIR"
+        if wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash; then
+            echo "NVM installed successfully."
+        else
+            echo "Failed to install NVM."
+        fi
 
       '';
 
@@ -138,7 +145,7 @@
           "1password"
           "whatsapp"
         ];
-        # taps = [ "fujiapple852/trippy" ];
+        # taps = [ ];
         brews = [
           "tailwindcss-language-server"
         ];
