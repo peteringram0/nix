@@ -20,6 +20,7 @@
         pkgs.starship
         pkgs.raycast
         pkgs.google-chrome
+        pkgs.slack
 
         # Companies
         pkgs.flyctl
@@ -71,11 +72,19 @@
         enable = true;
       };
 
+      system.activationScripts.simpleCompletionLanguageServerInstall.text = ''
+        #!/usr/bin/env bash
+        cargo install --git https://github.com/estin/simple-completion-language-server.git
+      '';
+
       system.defaults = {
         dock = {
           autohide = true;
           persistent-apps = [
             "/Applications/Nix Apps/Ghostty.app"
+            "/Applications/Nix Apps/Chrome.app"
+            "/Applications/Nix Apps/Obsidian.app"
+            "/Applications/Nix Apps/Slack.app"
           ];
           show-recents = false;
           tilesize = 20;
@@ -105,6 +114,9 @@
 
       # Show hidden files in finder
       system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
+
+      # Dark mode
+      system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
