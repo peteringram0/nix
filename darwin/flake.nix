@@ -110,7 +110,7 @@
         wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
         # Set desktop wallpaper
-        /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/pingram/Pictures/test.jpg"'
+        /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "./lost-man.jpg"'
 
       '';
 
