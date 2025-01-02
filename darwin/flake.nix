@@ -78,8 +78,14 @@
       '';
 
       system.activationScripts.setDesktopBackground.text = ''
+        #!/usr/bin/env bash
         echo "running";
         /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/pingram/Pictures/test.jpg"'
+      '';
+
+      system.activationScripts.nvmInstall.text = ''
+        #!/usr/bin/env bash
+        wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
       '';
 
       system.defaults = {
