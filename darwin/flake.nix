@@ -96,6 +96,20 @@
       system.activationScripts.postActivation.text = ''
         #!/usr/bin/env bash
 
+        export HOME=/Users/pingram
+
+        HELIX_DIR="$HOME/code/helix"
+
+        # Check if the directory exists
+        if [ -d "$HELIX_DIR" ]; then
+          echo "Directory $HELIX_DIR already exists. Doing nothing."
+        else
+          echo "Directory $HELIX_DIR does not exist. Cloning repository..."
+          mkdir -p "$HOME/code"
+          git clone https://github.com/helix-editor/helix "$HELIX_DIR"
+          cargo install --path "$HELIX_DIR/helix-term" --locked
+        fi
+
         # Simple completion language server install
         cargo install --git https://github.com/estin/simple-completion-language-server.git
 
@@ -103,7 +117,6 @@
         /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "${self}/lost-man.jpg"'
        
         # Install Oh My Zsh unattended
-        export HOME=/Users/pingram
         if sudo -u pingram sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; then
             echo "Oh My Zsh installed successfully."
         else
