@@ -11,7 +11,9 @@
   let
     configuration = { pkgs, ... }: {
 
-      mac-app-util.darwinModules.default
+      imports = [
+        mac-app-util.darwinModules.default
+      ];
 
       environment.systemPackages = [
 
