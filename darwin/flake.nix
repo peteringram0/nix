@@ -158,6 +158,7 @@
           "1password"
           "whatsapp"
           "sublime-text"
+          "microsoft-teams"
         ];
         # taps = [ ];
         brews = [
