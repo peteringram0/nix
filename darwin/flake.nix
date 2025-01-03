@@ -46,7 +46,7 @@
         # pkgs.zsh-completions
         # pkgs.zsh-autocomplete
         # pkgs.zsh-autosuggestions
-        pkgs.zsh-syntax-highlighting
+        # pkgs.zsh-syntax-highlighting
         # pkgs.zsh-history
 
         # Language Tools
