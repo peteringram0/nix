@@ -157,6 +157,7 @@
         casks = [
           "1password"
           "whatsapp"
+          "sublime-text"
         ];
         # taps = [ ];
         brews = [
