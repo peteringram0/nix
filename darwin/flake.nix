@@ -9,6 +9,8 @@
   };
   outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util }:
   let
+    username = "pingram";
+    code_dir = "Code";
     configuration = { pkgs, ... }: {
 
       imports = [
@@ -32,7 +34,8 @@
         # Companies
         pkgs.flyctl
         
-        # Dev Tools        
+        # Dev Tools
+        pkgs.zsh
         pkgs.ghostty
         pkgs.zellij
         pkgs.yazi
@@ -44,15 +47,6 @@
         pkgs.docker
         pkgs.ripgrep
         pkgs.fzf
-
-        # Shell
-        # pkgs.oh-my-zsh
-        pkgs.zsh
-        # pkgs.zsh-completions
-        # pkgs.zsh-autocomplete
-        # pkgs.zsh-autosuggestions
-        # pkgs.zsh-syntax-highlighting
-        # pkgs.zsh-history
 
         # Language Tools
         pkgs.cargo
@@ -72,7 +66,9 @@
         pkgs.bash-language-server
       ];
 
+      nixpkgs.hostPlatform = "aarch64-darwin";
       nixpkgs.config.allowUnfree = true;
+
       nix.settings.experimental-features = "nix-command flakes";
 
       fonts.packages = [
@@ -82,47 +78,31 @@
       programs.zsh = {
         enable = true;
         enableCompletion = true;
-        # autocd = true;
-        # syntaxHighlighting.enable = true;
-        # autosuggestion.enable = true;
-        # history = {
-        #   size = 10000000;
-        #   save = 10000000;
-        #   ignoreSpace = true;
-        #   ignoreDups = true;
-        #   ignoreAllDups = true;
-        #   expireDuplicatesFirst = true;
-        #   extended = true;
-        #   share = true;
-        #   path = "/Users/pingram/.zsh_history";
-        # };
       };
 
       system.activationScripts.postActivation.text = ''
         #!/usr/bin/env bash
+        export HOME=/Users/${username}
 
-        export HOME=/Users/pingram
-
-        HELIX_DIR="$HOME/code/helix"
-
-        # Check if the directory exists
+        # Helix Install
+        HELIX_DIR="$HOME/${code_dir}/helix"
         if [ -d "$HELIX_DIR" ]; then
           echo "Directory $HELIX_DIR already exists. Doing nothing."
         else
           echo "Directory $HELIX_DIR does not exist. Cloning repository..."
-          mkdir -p "$HOME/code"
+          mkdir -p "$HOME/${code_dir}"
           git clone https://github.com/helix-editor/helix "$HELIX_DIR"
           cargo install --path "$HELIX_DIR/helix-term" --locked
         fi
 
-        # Simple completion language server install
+        # Simple Completion Language Server Install
         cargo install --git https://github.com/estin/simple-completion-language-server.git
 
-        # Set desktop wallpaper
+        # Set Desktop Wallpaper
         /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "${self}/lost-man.jpg"'
        
-        # Install Oh My Zsh unattended
-        if sudo -u pingram sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; then
+        # Oh My Zsh Install
+        if sudo -u ${username} sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; then
             echo "Oh My Zsh installed successfully."
         else
             echo "Failed to install Oh My Zsh."
@@ -130,13 +110,12 @@
 
         # NVM install
         export NVM_DIR="$HOME/.nvm"
-        sudo -u pingram mkdir -p "$NVM_DIR"
+        sudo -u ${username} mkdir -p "$NVM_DIR"
         if wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash; then
             echo "NVM installed successfully."
         else
             echo "Failed to install NVM."
         fi
-
       '';
 
       system.defaults = {
@@ -170,10 +149,6 @@
           "tailwindcss-language-server"
         ];
       };
-           
-      # imports = [
-      #  ./dock
-      # ];
 
       # Scroll direction
       system.defaults.NSGlobalDomain."com.apple.swipescrolldirection" = false;
@@ -191,15 +166,11 @@
       system.configurationRevision = self.rev or self.dirtyRev or null;
 
       # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
       system.stateVersion = 5;
-
-      nixpkgs.hostPlatform = "aarch64-darwin";
       
     };
   in
   {
-    # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
     darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
       modules = [
